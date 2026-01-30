@@ -82,5 +82,9 @@ python main.py --use_color --use_normal --test_ckpt ckpt/3DCoCa/checkpoint_best.
 python main.py --use_color --use_multiview --test_ckpt ckpt_2D/3DCoCa/checkpoint_best.pth --test_caption
 ```
 
+## 🌟 Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=TH-AI-Lab-PKU/3DCoCa&type=date&legend=top-left)](https://www.star-history.com/#TH-AI-Lab-PKU/3DCoCa&type=date&legend=top-left)
+
 ## 🙏 Acknowledgements
 We thank the authors of the following open-source repositories for their valuable code and inspiration: [EPCL](https://github.com/XiaoshuiHuang/EPCL), [CoCa](https://github.com/lucidrains/CoCa-pytorch), and [Vote2Cap-DETR](https://github.com/ch3cook-fdu/Vote2Cap-DETR).

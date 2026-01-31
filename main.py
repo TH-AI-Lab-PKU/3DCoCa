@@ -149,7 +149,7 @@ def main(args):
     for name, param in model.named_parameters():
         if not param.is_cuda:
             raise RuntimeError(f"模型参数 {name} 未正确转移到GPU")
-    # 数据加载循环中添加
+    # add in the data loading loop
     #for batch_data_label in dataloader:
         #batch_data_label = {k: v.to(device) for k, v in batch_data_label.items()}
     # testing phase

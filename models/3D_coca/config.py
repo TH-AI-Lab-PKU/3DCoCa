@@ -55,12 +55,12 @@ class model_config:
         self.loss_center_weight = 5.
         self.loss_size_weight = 1.
 
-        # 新增文本编码配置
-        self.text_dim = 256 # 保持与视觉特征维度一致
+        # text encoder config
+        self.text_dim = 256 # keep consistent with visual feature dimension
         self.image_dim = 256
         self.text_encoder_depth = 6
         self.multimodal_depth = 6
         self.num_tokens=20000
         self.text_heads = 8
         self.text_ff_mult = 4
-        self.text_seq_len = 77  # 根据CoCa的默认文本序列长度
+        self.text_seq_len = 77  # follow CoCa default text sequence length

@@ -164,7 +164,7 @@ def do_train(
     loss_avg = SmoothedValue(window_size=10)
     device = next(model.parameters()).device
     for batch_data_label in dataloaders['train']:
-        # 确保所有输入数据转移到模型所在设备
+        # ensure all inputs are moved to the model device
         batch_data_label = {k: (v.to(device) if isinstance(v, torch.Tensor) else v) for k, v in batch_data_label.items()}
 
     model.train()
@@ -192,15 +192,15 @@ def do_train(
                 logout("Loss in not finite. Training will be stopped.")
                 sys.exit(1)
             
-            # 在 loss.backward() 前添加设备检查
+            # add device checks before loss.backward()
             def check_tensor_device(tensor, name):
                 if not tensor.is_cuda:
                     raise RuntimeError(f"{name} 在CPU上，应在GPU上")
 
-            # 检查损失张量
+            # check loss tensor
             check_tensor_device(loss, "损失张量")
     
-            # 检查模型参数设备
+            # check model parameter device
             for name, param in model.named_parameters():
                 if not param.is_cuda:
                     raise RuntimeError(f"模型参数 {name} 在CPU上")
@@ -567,11 +567,11 @@ def evaluate_caption(
     print("preparing corpus...")
     gt_corpus = {}
     for batch in dataset_loader:
-        # 假设 batch 是字典且包含 "scan_idx" 和 "scene_caption"
-        # "scene_caption" 为一个长度为 batch_size 的列表或 tensor（每个元素为字符串）
+        # assume batch is a dict with "scan_idx" and "scene_caption"
+        # "scene_caption" is a list or tensor of length batch_size (each element is a string)
         scene_idxs = batch["scan_idx"].cpu().tolist()
         scene_caps = batch["scene_caption"]
-        # 如果 scene_caps 是 tensor，则转换为列表
+        # if scene_caps is a tensor, convert to a list
         if isinstance(scene_caps, torch.Tensor):
             scene_caps = scene_caps.tolist()
         for i, idx in enumerate(scene_idxs):

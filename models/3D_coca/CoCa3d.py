@@ -596,14 +596,14 @@ class CoCa_3D(nn.Module):
             )
 
         else:
-            # print(f"输入的文本形状: {text_tokens.shape}")
-            # print(f"输入的图像形状: {image_tokens.shape}")
+            # print(f"Input text shape: {text_tokens.shape}")
+            # print(f"Input image shape: {image_tokens.shape}")
             text_logits_or_embeds = self.coca(
                 text=text_tokens,
                 image_tokens=image_tokens,
                 return_loss=False
             )
-            # print(f"文本 logits 或 embeddings 形状: {text_logits_or_embeds.shape}")
+            # print(f"Text logits or embeddings shape: {text_logits_or_embeds.shape}")
             pred_captions = self.decode_coca_logits(
                 text_logits=text_logits_or_embeds,
                 tokenizer=self.tokenizer,
@@ -611,7 +611,7 @@ class CoCa_3D(nn.Module):
                 beam_size=3
             )
             num_decoded = len(pred_captions)
-            # print(f"解码得到的句子数量: {num_decoded}")
+            # print(f"Number of decoded sentences: {num_decoded}")
             batch_size, nqueries_expected, _, _ = box_predictions['outputs']["box_corners"].shape
             if num_decoded == batch_size * nqueries_expected:
                 nqueries = nqueries_expected

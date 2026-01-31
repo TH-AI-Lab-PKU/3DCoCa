@@ -465,7 +465,7 @@ class CoCa(nn.Module):
 
         img_queries = repeat(self.img_queries, 'n d -> b n d', b=image_tokens.shape[0])
         if image_tokens.ndim == 2:
-            # 从 [4096, 64] 变成 [4096, 1, 64]
+            # reshape from [4096, 64] to [4096, 1, 64]
             image_tokens = image_tokens.unsqueeze(1)
         img_queries = self.img_attn_pool(img_queries, image_tokens)
         img_queries = self.img_attn_pool_norm(img_queries)

@@ -47,7 +47,7 @@ class VoteQuery(nn.Module):
         encode_features = encode_features.contiguous()
         out = self.FFN_vote(encode_features)
 
-        coord_shift = torch.clamp(torch.sigmoid(out[:, :3, :]), 0.1, 0.9)  # 限制梯度范围
+        coord_shift = torch.clamp(torch.sigmoid(out[:, :3, :]), 0.1, 0.9)  # limit gradient range
         vote_xyz = encode_xyz.contiguous() + coord_shift.permute(0, 2, 1).contiguous() - 0.5
 
         encode_features = encode_features + out[:, 3:, :]
